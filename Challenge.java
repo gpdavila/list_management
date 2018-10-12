@@ -2,8 +2,12 @@
 public class Challenge{
 	static String function;
 	static String parameters;
+	// Enable verbose for showing functional details and debug messages. 
 	static final boolean verbose = false;
 
+	/*
+		Main Funtion
+	*/
 	public static void main(String[] args){
 		ListClass whiteList = new ListClass("whiteList.txt");
 		ListClass blackList = new ListClass("blackList.txt");			
@@ -54,6 +58,10 @@ public class Challenge{
 				System.out.println("Not Available Function");
 		}
 	}
+
+	/*
+		Parse Argument Funtion
+	*/
 	public static void parseArguments(String[] args ){		
 
 		if(args.length == 0){

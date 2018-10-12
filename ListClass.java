@@ -5,8 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-
-// Superclass for White and Black Lists
 public class ListClass{ 
 	private File file; // Instantiate in the constructor
 
@@ -36,6 +34,13 @@ public class ListClass{
 	}
 	// Garbage-Collected language, so no need for a destructor method
 
+	/*
+		Verify if an url is in the whitelist or blacklist
+		Whitelist -> Safe
+		Blacklist -> Unsafe
+		Other 	  -> Unknown
+
+	*/
 	public boolean verify(String url){
         String line;
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -52,6 +57,9 @@ public class ListClass{
 	    return false;
 	}
 
+	/*
+		Add an url to a list. Case the url already exists in the list, nothing happens.
+	*/
 	public void add(String url){
 		if(verify(url)){
 				if(Challenge.verbose)
@@ -70,6 +78,9 @@ public class ListClass{
 		}
 	}
 
+	/*
+		Remove an url from a list. Case the url doesnt exists in the list, nothing happens.
+	*/
 	public boolean remove(String url){
 		File temp = new File("temp");
 		boolean flag = false;
@@ -91,8 +102,9 @@ public class ListClass{
 	    }catch (IOException e){
 	        System.out.println(e);
 	    }
-	    // Colocar explicação do pq nao precisa do finally  		
- 		
+ 		//"finally" statement to close 'bw' is not needed since 
+		// try-with-resources is used 
+		
  		if(!file.delete()){
         	System.out.println("Could not delete file"); 			  			
         	System.exit(0); 		
@@ -103,6 +115,10 @@ public class ListClass{
  		}
 		return flag;
 	}
+
+	/*
+		Shows all the url belonging to a list.
+	*/
 	public void show(){
 		String url = null;
 		try(BufferedReader br = new BufferedReader(new FileReader(file))){
